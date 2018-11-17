@@ -15,6 +15,7 @@
  */
 package egovframework.example.sample.web;
 
+import java.util.Collection;
 import java.util.List;
 
 import egovframework.example.sample.service.EgovSampleService;
@@ -93,7 +94,14 @@ public class EgovSampleController {
 		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-		List<?> sampleList = sampleService.selectSampleList(searchVO);
+		List sampleList = sampleService.selectSampleList(searchVO);
+		
+		if(sampleList.size()==0){
+			SampleVO vo = new SampleVO();
+			sampleList.add(vo);
+			model.addAttribute("noData", 1);
+		}
+		
 		model.addAttribute("resultList", sampleList);
 
 		int totCnt = sampleService.selectSampleListTotCnt(searchVO);

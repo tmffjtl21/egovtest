@@ -6,7 +6,7 @@
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
 
-	<resultMap id="sample" class="egovframework.example.sample.service.SampleVO">
+	<resultMap id="yjSample" class="egovframework.yjlee.service.YjleeSampleVO">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="description" column="description"/>
@@ -15,57 +15,12 @@
 		<result property="addDate" column="add_date"/>
 		
 	</resultMap>
-
-	<insert id="sampleDAO.insertSample">
-		<![CDATA[
-			INSERT INTO SAMPLE 
-				( ID
-				  , NAME
-				  , DESCRIPTION
-				  , USE_YN
-				  , REG_USER
-				  , ADD_DATE )
-			VALUES ( #id#
-				  , #name#
-				  , #description#
-				  , #useYn#
-				  , #regUser#
-				  , sysdate() )
-		]]>
-	</insert>
 	
-	<update id="sampleDAO.updateSample">
-		<![CDATA[
-			UPDATE SAMPLE
-			SET ID=#id#
-				, NAME=#name#
-				, DESCRIPTION=#description#
-				, USE_YN=#useYn#
-			WHERE ID=#id#
-		]]>
-	</update>
-	
-	<delete id="sampleDAO.deleteSample">
-		<![CDATA[
-			DELETE FROM SAMPLE 
-			WHERE ID=#id#
-		]]>
-	</delete>
-    
-    <select id="sampleDAO.selectSample" resultMap="sample">
-        <![CDATA[
-            SELECT
-                ID, NAME, DESCRIPTION, USE_YN, REG_USER, ADD_DATE
-            FROM SAMPLE 
-            WHERE ID=#id#
-        ]]>
-    </select>
-	
-	<select id="sampleDAO.selectSampleList" parameterClass="searchVO" resultClass="egovMap">
+	<select id="yjleeSampleDAO.selectSampleList" parameterClass="searchVO" resultClass="egovMap">
 
 			SELECT
 				ID, NAME, DESCRIPTION, USE_YN, REG_USER,ADD_DATE
-			FROM SAMPLE
+			FROM yjlee_sample
 			WHERE 1=1
 			<isEqual prepend="AND" property="searchCondition" compareValue="0">
 				ID LIKE '%' || #searchKeyword# || '%'
@@ -76,18 +31,21 @@
 			ORDER BY ADD_DATE DESC
 			LIMIT #recordCountPerPage# OFFSET #firstIndex#		
 	</select>
-	
-	<select id="sampleDAO.selectSampleListTotCnt" parameterClass="searchVO" resultClass="int">
-
-			SELECT COUNT(*) totcnt
-			FROM SAMPLE
+	<select id="yjleeSampleDAO.selectTotCnt" parameterClass="searchVO" resultClass="int" >
+			
+			SELECT
+				COUNT(*)
+			FROM yjlee_sample
 			WHERE 1=1
+			
 			<isEqual prepend="AND" property="searchCondition" compareValue="0">
 				ID LIKE '%' || #searchKeyword# || '%'
 			</isEqual>
 			<isEqual prepend="AND" property="searchCondition" compareValue="1">
 				NAME LIKE '%' || #searchKeyword# || '%'
 			</isEqual>
-	</select>
 
+		
+	
+	</select>
 </sqlMap>

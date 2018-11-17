@@ -46,6 +46,8 @@ public class SampleVO extends SampleDefaultVO {
 
 	/** 사용여부 */
 	private String useYn;
+	
+	private String addDate;
 
 	/** 등록자 */
 	private String regUser;
@@ -90,4 +92,13 @@ public class SampleVO extends SampleDefaultVO {
 		this.regUser = regUser;
 	}
 
+	public String getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
+	
 }

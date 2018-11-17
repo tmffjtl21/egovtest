@@ -123,6 +123,12 @@
         				&nbsp;<form:errors path="regUser" /></td>
                     </c:if>
     		</tr>
+   			<tr>
+       			<td class="tbtd_caption"><label for="addDate"><spring:message code="title.sample.addDate" /></label></td>
+       			<td class="tbtd_content">
+       				<form:input path="addDate" cssClass="essentiality" maxlength="10" readonly="true" />
+       			</td>
+       		</tr>
     	</table>
       </div>
     	<div id="sysbtn">
